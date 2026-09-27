@@ -1,110 +1,192 @@
-The dataset includes information such as:
+# Titanic Dataset: Exploratory Data Analysis
 
-PassengerId: Unique ID for each passenger.
+## Project Overview
 
-Survived: Survival (0 = No, 1 = Yes) - Target Variable.
+This project performs an **Exploratory Data Analysis (EDA)** of the Titanic passenger dataset to investigate the factors associated with passenger survival.
 
-Pclass: Ticket class (1 = 1st, 2 = 2nd, 3 = 3rd).
+The analysis covers data loading and inspection, missing-value handling, univariate analysis, and bivariate/multivariate analysis. The objective is to understand how characteristics such as **gender, passenger class, age, and port of embarkation** relate to survival outcomes.
 
-Name: Passenger name.
+## Dataset
 
-Sex: Passenger sex.
+The dataset contains information about passengers aboard the Titanic, including demographic, ticket, and survival information.
 
-Age: Age in years.
+### Features
 
-SibSp: # of siblings/spouses aboard the Titanic.
+| Feature       | Description                                                               |
+| ------------- | ------------------------------------------------------------------------- |
+| `PassengerId` | Unique identifier for each passenger                                      |
+| `Survived`    | Survival status: `0` = No, `1` = Yes                                      |
+| `Pclass`      | Passenger ticket class: 1st, 2nd, or 3rd                                  |
+| `Name`        | Passenger name                                                            |
+| `Sex`         | Passenger gender                                                          |
+| `Age`         | Passenger age in years                                                    |
+| `SibSp`       | Number of siblings/spouses aboard                                         |
+| `Parch`       | Number of parents/children aboard                                         |
+| `Ticket`      | Passenger ticket number                                                   |
+| `Fare`        | Passenger fare                                                            |
+| `Cabin`       | Passenger cabin number                                                    |
+| `Embarked`    | Port of embarkation: `C` = Cherbourg, `Q` = Queenstown, `S` = Southampton |
 
-Parch: # of parents/children aboard the Titanic.
+### Dataset Source
 
-Ticket: Ticket number.
+The dataset is available from the [Data Science Dojo Titanic Dataset](https://github.com/datasciencedojo/datasets/blob/master/titanic.csv).
 
-Fare: Passenger fare.
+The raw dataset can also be downloaded using:
 
-Cabin: Cabin number.
+```bash
+wget https://raw.githubusercontent.com/datasciencedojo/datasets/refs/heads/master/titanic.csv
+```
 
-Embarked: Port of Embarkation (C = Cherbourg, Q = Queenstown, S = Southampton).
+## Objectives
 
-The dataset can be found here:
+The main objectives of this project are to:
 
-https://github.com/datasciencedojo/datasets/blob/master/titanic.csv
+* Inspect and understand the structure of the dataset
+* Identify and handle missing values
+* Analyze individual variables using univariate analysis
+* Investigate relationships between passenger characteristics and survival
+* Visualize important patterns in the data
+* Identify the features that appear to have the strongest relationship with survival
 
-To download this data using terminal, run the following command:
+## Analysis
 
-!wget https://raw.githubusercontent.com/datasciencedojo/datasets/refs/heads/master/titanic.csv  
+### 1. Data Loading and Initial Inspection
 
-Task 1: Data Loading and Initial Inspection
-Load the dataset (e.g., using pandas in Python).
+The dataset is loaded using **Pandas** and initially inspected to understand its structure.
 
-Display the first 5 rows to get a quick look at the data structure.
+The analysis includes:
 
-Check the data types of all columns (.info()).
+* Displaying the first five rows
+* Examining column data types using `.info()`
+* Generating descriptive statistics using `.describe()`
+* Identifying missing values in each column
 
-Get descriptive statistics of the numerical columns (.describe()).
+### 2. Handling Missing Values
 
-Identify the total number of missing values for each column.
+Missing values are examined and addressed for the following columns:
 
-Task 2: Handling Missing Values
-Missing data can skew analysis. For this task, you will address the missing values in three key columns: Age, Cabin, and Embarked.
+#### Cabin
 
-Cabin:
+The percentage of missing values in the `Cabin` column is calculated. Because a large proportion of cabin information is missing, the usefulness of this feature is evaluated before deciding whether to retain or remove it from the analysis.
 
-Calculate the percentage of missing values in the Cabin column.
+#### Embarked
 
-Decision: Do we need to drop the Cabin column entirely from the analysis? Briefly justify your reason.
+The most frequently occurring embarkation port is identified using the mode. Missing values in `Embarked` are then replaced with the most frequent value.
 
-Embarked:
+#### Age
 
-Find the most frequent port of embarkation (the mode).Impute the missing values in the Embarked column with the mode.
+Missing values in `Age` are replaced with the **median age** of the passengers.
 
-Age:
+## 3. Univariate Analysis
 
-Impute the missing values in the Age column with the median age. 
+Univariate analysis examines individual variables independently.
 
-Task 3: Univariate Analysis 
-Univariate analysis looks at a single variable at a time.
+### Survival Rate
 
-Survival Rate:
+The overall percentage of passengers who survived is calculated and visualized using a count plot/bar chart.
 
-Calculate the overall survival rate (percentage of passengers who survived).
+### Passenger Class
 
-Visualize the distribution of the Survived variable (e.g., a count plot/bar chart).
+The distribution of passengers across the three ticket classes is visualized to determine which class contained the largest number of passengers.
 
-Passenger Class (Pclass):
+### Age Distribution
 
-Visualize the distribution of Pclass using a count plot.
+A histogram is used to examine the distribution of passenger ages and identify the general age patterns within the dataset.
 
-Identify which class had the most passengers.
+## 4. Bivariate and Multivariate Analysis
 
-Age Distribution:
+This section investigates relationships between passenger characteristics and the target variable, `Survived`.
 
-Plot a histogram of the Age column to visualize its distribution.
+### Survival by Sex
 
-Task 4: Bivariate and Multivariate Analysis 
-Bivariate analysis explores the relationship between two variables, specifically focusing on how other features relate to the target variable (Survived).
+The number and proportion of survivors and non-survivors are compared across passenger genders using crosstabulation and visualizations.
 
-Survival by Sex:
+This analysis helps examine whether survival outcomes differed substantially between male and female passengers.
 
-Create a crosstabulation (or a grouped count) to show the count of survivors and non-survivors grouped by Sex.
+### Survival by Passenger Class
 
-Visualize this relationship using a stacked bar chart or a grouped count plot.
+Survival rates are calculated for each passenger class and visualized to examine the relationship between ticket class and survival.
 
-Question: Which gender had a significantly higher survival rate?
+This provides insight into whether passenger class was associated with different survival outcomes.
 
-Survival by Class (Pclass):
+### Survival by Age
 
-Calculate and visualize the survival rate for each Pclass.
+The age distributions of survivors and non-survivors are compared using visualizations.
 
-Question: Is there a clear correlation between ticket class and survival probability?
+Particular attention is given to the survival patterns among **children, adults, and elderly passengers**.
 
-Survival by Age:
+### Survival by Port of Embarkation
 
-Plot and compare the age distribution of survivors vs. non-survivors.
+Survival rates are calculated and visualized for each embarkation port:
 
-Observation: What does the plot suggest about the survival chances of children and the elderly?
+* Cherbourg (`C`)
+* Queenstown (`Q`)
+* Southampton (`S`)
 
-Survival by Port of Embarkation (Embarked):
+This analysis explores whether survival outcomes varied depending on the passenger's port of embarkation.
 
-Calculate and visualize the survival rate for each Embarked port.
+## 5. Key Insights
 
-Task 5: Conclusion and Insights 
-Based on your EDA, write a brief (3-5 sentences) conclusion summarizing the most significant factors affecting survival on the Titanic. Highlight the top 2-3 features that appear to be the strongest predictors of survival.
+The analysis examines several factors that may be associated with Titanic passenger survival, particularly:
+
+* **Sex**
+* **Passenger class (`Pclass`)**
+* **Age**
+* **Port of embarkation (`Embarked`)**
+
+The visualizations and statistical summaries are used to identify patterns and differences in survival outcomes across these groups.
+
+> **Note:** Observed relationships in this exploratory analysis indicate associations within the dataset and should not be interpreted as evidence that a particular feature directly caused survival.
+
+## Technologies Used
+
+* **Python**
+* **Google Colab**
+* **Pandas**
+* **NumPy**
+* **Matplotlib**
+* **Seaborn**
+
+## Project Structure
+
+```text
+Titanic-EDA/
+│
+├── Titanic_EDA.ipynb
+├── titanic.csv
+└── README.md
+```
+
+## How to Run
+
+### Option 1: Google Colab
+
+Open the `.ipynb` file in Google Colab and run the notebook cells sequentially.
+
+### Option 2: Local Environment
+
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd YOUR_REPOSITORY
+```
+
+Install the required libraries:
+
+```bash
+pip install pandas numpy matplotlib seaborn
+```
+
+Then open the notebook using Jupyter Notebook or JupyterLab.
+
+## Author
+
+**Nadiya Nowshin**
+
+Computer Science | UI/UX & Product Design | AI & HCI
