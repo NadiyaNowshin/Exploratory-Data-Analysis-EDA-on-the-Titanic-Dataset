@@ -189,4 +189,3 @@ Then open the notebook using Jupyter Notebook or JupyterLab.
 
 **Nadiya Nowshin**
 
-Computer Science | UI/UX & Product Design | AI & HCI
